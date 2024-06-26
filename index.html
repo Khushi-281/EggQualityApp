@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EGG QUALITY ANALYSIS</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="manifest" href="/static/manifest.json">
+
+</head>
+<body>
+    <div class="nav">
+        <a href="/" class="nav-link">HOME</a>
+        <a href="/about" class="nav-link">ABOUT</a>
+    </div>
+    <div class="container">
+        <h1>EGG QUALITY ANALYSIS</h1>
+        <form id="uploadForm" method="POST" enctype="multipart/form-data">
+            <div class="file-input">
+                <input type="file" id="fileInput" name="file" accept=".jpg, .jpeg, .png">
+                <label for="fileInput"><i class="fas fa-upload"></i> Choose a file</label>
+            </div>
+            <div class="url-input">
+                <input type="text" id="urlInput" name="url" placeholder="Enter image URL">
+            </div>
+            <div id="imagePreview" class="preview-image"></div>
+            <button class="btn" type="submit"><i class="fas fa-paper-plane"></i> Submit</button>
+            <button class="btn clear-btn" type="button" onclick="clearImage()"><i class="fas fa-times"></i> Clear</button>
+        </form>
+        <div id="result" class="result"></div>
+    </div>
+    <script src="/static/scripts.js"></script>
+    <script>
+        function clearImage() {
+            document.getElementById('fileInput').value = ''; // Clear file input
+            document.getElementById('urlInput').value = ''; // Clear URL input
+            document.getElementById('imagePreview').innerHTML = ''; // Clear image preview
+            document.getElementById('result').innerText = ''; // Clear prediction result
+        }
+    </script>
+    <script>
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/static/service-worker.js')
+              .then(registration => {
+                console.log('Service Worker registered:', registration);
+              })
+              .catch(error => {
+                console.error('Service Worker registration failed:', error);
+              });
+          });
+        }
+      </script>
+      
+</body>
+</html>
